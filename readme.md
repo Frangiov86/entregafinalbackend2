@@ -1,4 +1,4 @@
-Comision 76855
+Alumno: Francisco Andres Giovanaz Romero Comision 76855
 
 Proyecto de ecommerce Crud de usuarios+mejoramiento de arquitectura, órdenes de compra, ticket, funcionalidades de carrito, roles de usuario, dto y Dao y recuperación de contraseña mediante Token y correo electrónico enviado a casilla de usuario registrado.
 
