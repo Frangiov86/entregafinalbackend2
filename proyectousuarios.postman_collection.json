@@ -1,0 +1,466 @@
+{
+	"info": {
+		"_postman_id": "4cd273b8-29f9-4ce3-8145-ed627c4ea384",
+		"name": "proyectousuarios",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43667998",
+		"_collection_link": "https://franciscogiovanaz.postman.co/workspace/Francisco-Giovanaz's-Workspace~fea79422-7224-4d71-84d6-2cea991ba01f/collection/43667998-4cd273b8-29f9-4ce3-8145-ed627c4ea384?action=share&source=collection_link&creator=43667998"
+	},
+	"item": [
+		{
+			"name": "entregafinal",
+			"item": [
+				{
+					"name": "Manejos de usuarios",
+					"item": [
+						{
+							"name": "Admin",
+							"item": [
+								{
+									"name": "listarusuarios (soloadmin)",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/users",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"users"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "registrarusuarioadmin",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"first_name\": \"Admin\",\r\n  \"last_name\": \"Experto\",\r\n  \"email\": \"admin@test.com\",\r\n  \"age\": 40,\r\n  \"password\": \"admin123\",\r\n  \"role\": \"admin\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/sessions/register",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"sessions",
+												"register"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "registrarusuario",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"first_name\": \"Francisco\",\r\n  \"last_name\": \"Giovanaz\",\r\n  \"email\": \"pacodelacosta@gmail.com\",\r\n  \"age\": 39,\r\n  \"password\": \"golshi25\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/sessions/register",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"sessions",
+												"register"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Login",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"admin@test.com\",\r\n  \"password\": \"admin123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/sessions/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"sessions",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "usuario actualmente logueado",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/sessions/current",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"sessions",
+										"current"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "logout",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/sessions/logout",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"sessions",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Manejo de carrito",
+					"item": [
+						{
+							"name": "carrito",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/sessions/current",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"sessions",
+										"current"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "agregarproductoalcarrito",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"cantidad\": 1 }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/carts/68d46453611c80444e450a80/products/68d400e312b928bd9bb4b5c0",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"carts",
+										"68d46453611c80444e450a80",
+										"products",
+										"68d400e312b928bd9bb4b5c0"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "crearcarrito",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/carts",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"carts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "detallecarrito",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/carts/68d448f3a6a333f46a3e8065/details",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"carts",
+										"68d448f3a6a333f46a3e8065",
+										"details"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "vaciarcarrito",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/carts/mine",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"carts",
+										"mine"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Manejo de productos (solo admin)",
+					"item": [
+						{
+							"name": "actualizarproducto",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"stock\": 25 }\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/products/68d400e312b928bd9bb4b5c0",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"products",
+										"68d400e312b928bd9bb4b5c0"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "crearproducto",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"title\":\"Zapatillas New Balance, Dromatic\",\"price\":89500,\"stock\":45,\"category\":\"calzado\" }\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/products",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "listarproductos (soloadmin)",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Compra de producto",
+					"item": [
+						{
+							"name": "compra",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/purchase/68d448f3a6a333f46a3e8065/purchase",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"purchase",
+										"68d448f3a6a333f46a3e8065",
+										"purchase"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Recuperación y reseteo de contraseña",
+					"item": [
+						{
+							"name": "recuperacioncontraseña",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"email\": \"pacodelacosta@gmail.com\", \"devolverToken\": true }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/password/forgot",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"password",
+										"forgot"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "resetcontraseña",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"nuevaContrasena\": \"mqueen25\" }\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/password/reset/b00c84f37b8bbb63b9540ce1b1e3fb4cd88cdca72fbf745e9641edc54a9ec358",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"password",
+										"reset",
+										"b00c84f37b8bbb63b9540ce1b1e3fb4cd88cdca72fbf745e9641edc54a9ec358"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

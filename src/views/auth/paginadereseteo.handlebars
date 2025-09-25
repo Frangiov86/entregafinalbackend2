@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Restablecer contraseña</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body { background:#f4f6f8; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+    .card { max-width:420px; margin:6vh auto; background:#fff; border-radius:16px; padding:28px; box-shadow:0 8px 28px rgba(0,0,0,.08); }
+    h1 { font-size:1.25rem; margin:0 0 12px; }
+    p { color:#6b7280; margin:0 0 20px; }
+    label { display:block; font-weight:600; margin:12px 0 6px; }
+    input { width:100%; padding:12px; border:1px solid #d1d5db; border-radius:10px; outline:none; }
+    input:focus { border-color:#2563eb; box-shadow:0 0 0 3px rgba(37,99,235,.15); }
+    button { width:100%; margin-top:16px; padding:12px; border:0; border-radius:10px; background:#2563eb; color:#fff; font-weight:700; cursor:pointer; }
+    button:disabled { opacity:.6; cursor:not-allowed; }
+    .note { font-size:.85rem; color:#6b7280; margin-top:10px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Restablecer contraseña</h1>
+    <p>Ingresá tu contraseña anterior y la nueva. El enlace expira en 1 hora.</p>
+
+    <form id="resetForm">
+      <input type="hidden" id="token" value="{{token}}" />
+
+      <label for="oldPassword">Contraseña anterior</label>
+      <input id="oldPassword" type="password" placeholder="Tu contraseña actual" autocomplete="current-password" required />
+
+      <label for="newPassword">Contraseña nueva</label>
+      <input id="newPassword" type="password" placeholder="Mínimo 8 caracteres" autocomplete="new-password" minlength="8" required />
+
+      <button id="btnSubmit" type="submit">Cambiar contraseña</button>
+      <div class="note">Por seguridad, no se permite repetir la contraseña anterior.</div>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    const form = document.getElementById('resetForm');
+    const btn  = document.getElementById('btnSubmit');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const token = document.getElementById('token').value;
+      const oldPassword = document.getElementById('oldPassword').value.trim();
+      const newPassword = document.getElementById('newPassword').value.trim();
+
+      // Validaciones rápidas en cliente (el server igual valida)
+      if (!oldPassword || !newPassword) {
+        return Swal.fire('Campos incompletos', 'Completá ambos campos.', 'warning');
+      }
+      if (newPassword.length < 8) {
+        return Swal.fire('Contraseña muy corta', 'Usá al menos 8 caracteres.', 'warning');
+      }
+      if (oldPassword === newPassword) {
+        return Swal.fire('Contraseña inválida', 'La nueva no puede ser igual a la anterior.', 'error');
+      }
+
+      btn.disabled = true;
+
+      try {
+        //  IMPORTANTE: el backend espera "nuevaContrasena"
+        const resp = await fetch(`/api/password/reset/${encodeURIComponent(token)}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nuevaContrasena: newPassword, oldPassword })
+        });
+
+        const data = await resp.json();
+        if (!resp.ok) throw new Error(data?.error || 'No se pudo cambiar la contraseña');
+
+        await Swal.fire('¡Listo!', 'Contraseña cambiada, vuelva a loguearse.', 'success');
+       
+        window.location.href = '/login';
+      } catch (err) {
+        Swal.fire('Error', err.message, 'error');
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
